@@ -1,0 +1,43 @@
+{
+  "name": "protocore-cli",
+  "version": "0.0.0",
+  "author": "Ashwin Hegde",
+  "description": "",
+  "homepage": "https://github.com/hegdeashwin/protocore-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hegdeashwin/protocore-cli.git"
+  },
+  "issues": {
+    "url": "https://github.com/hegdeashwin/protocore-cli/issues?state=open"
+  },
+  "milestones": {
+    "url": "https://github.com/hegdeashwin/protocore-cli/issues/milestones"
+  },
+  "releases": {
+    "url": "https://github.com/hegdeashwin/protocore-cli/releases"
+  },
+  "wiki": {
+    "url": "https://github.com/hegdeashwin/protocore-cli/wiki"
+  },
+  "dependencies": {
+    "commander": "~2.6.0",
+    "mkdirp": "0.5.0"
+  },
+  "keywords": [
+    "generator",
+    "framework",
+    "protocore",
+    "cli",
+    "rest",
+    "boilerplate",
+    "skeleton"
+  ],
+  "engines": {
+    "node": ">=0.10"
+  },
+  "licenses": {
+    "type": "MIT",
+    "url": "https://raw.githubusercontent.com/hegdeashwin/protocore-cli/master/LICENSE"
+  }
+}
