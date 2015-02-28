@@ -1,0 +1,191 @@
+#!/usr/bin/env node
+
+var os = require('os'),
+	fs = require('fs'),
+	path = require('path'),
+	readline = require('readline');
+
+var program = require('commander'),
+	mkdirp = require('mkdirp');
+
+var product = require('../package.json');
+
+program
+	.version(product.version)
+	.usage('[options] [dir]')
+	.option('-c, --css <engine>', 'Add stylesheet <engine> support (less). Defaults is css.')
+	.option('-f, --force', 'force on non-empty directory')
+	.option('-a, --about', 'About Protocore-Cli ' + product.version)
+	.parse(process.argv);
+
+
+/**
+ * Check if the given directory `path` is empty.
+ *
+ * @param {String} path
+ * @param {Function} fn
+ */
+function isDirectoryEmpty(path, fn) {
+	fs.readdir(path, function(error, files) {
+		if (error) {
+			throw error;
+		}
+		fn(!files || !files.length);
+	});
+};
+
+/**
+ * Get the confirmation for user input.
+ *
+ * @param {String} message
+ * @param {Function} callback
+ */
+function confirm(message, callback) {
+	var rl = readline.createInterface({
+		input: process.stdin,
+		output: process.stdout
+	});
+
+	rl.question(message, function(input) {
+		rl.close();
+
+		callback(/^y|Y|yes|ok|true$/i.test(input))
+	});
+
+}
+
+/**
+ * echo str > path.
+ *
+ * @param {String} path
+ * @param {String} str
+ */
+function write(path, str, mode) {
+	fs.writeFileSync(path, str, {
+		mode: mode || 0666
+	});
+	console.log('   \x1b[36mcreate\x1b[0m : ' + path);
+}
+
+/**
+ * Copy template
+ *
+ * @param {String} from
+ * @param {String} to
+ */
+function copy_template(from, to) {
+	from = path.join(__dirname, '..', 'templates', from);
+	write(to, fs.readFileSync(from, 'utf-8'));
+}
+
+/**
+ * Load template.
+ *
+ * @param {String} name
+ */
+function loadTemplate() {
+	return fs.readFileSync(path.join(__dirname, '..', 'templates', name), 'utf-8');
+};
+
+function generateScaffolding(appName, scaffoldingPath) {
+
+	function completed() {
+		console.log("Completed");
+	}
+
+	mkdirp(scaffoldingPath, function() {
+		copy_template('../templates/package.json', scaffoldingPath + '/package.json');
+		copy_template('../templates/server.js', scaffoldingPath + '/server.js');
+		copy_template('../templates/Gruntfile.js', scaffoldingPath + '/Gruntfile.js');
+
+		mkdirp(scaffoldingPath + '/src', function() {
+			copy_template('../templates/src/index.html', scaffoldingPath + '/src/index.html');
+			copy_template('../templates/src/main.js', scaffoldingPath + '/src/main.js');
+		});
+		mkdirp(scaffoldingPath + '/src/apps');
+		mkdirp(scaffoldingPath + '/src/apps/router', function() {
+			copy_template('../templates/src/apps/router/routes.js', scaffoldingPath + '/src/apps/router/routes.js');
+		});
+		mkdirp(scaffoldingPath + '/src/apps/views', function() {
+			copy_template('../templates/src/apps/views/_baseView.js', scaffoldingPath + '/src/apps/views/_baseView.js');
+			copy_template('../templates/src/apps/views/aboutView.js', scaffoldingPath + '/src/apps/views/aboutView.js');
+			copy_template('../templates/src/apps/views/homeView.js', scaffoldingPath + '/src/apps/views/homeView.js');
+		});
+		mkdirp(scaffoldingPath + '/src/assets');
+		mkdirp(scaffoldingPath + '/src/stylesheets', function() {
+			switch (program.css) {
+				default:
+					case 'less':
+					mkdirp(scaffoldingPath + '/src/stylesheets/less', function() {
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/base', function() {
+						copy_template('../templates/src/stylesheets/less/base/_base.less', scaffoldingPath + '/src/stylesheets/less/base/_base.less');
+						copy_template('../templates/src/stylesheets/less/base/_imports.less', scaffoldingPath + '/src/stylesheets/less/base/_imports.less');
+						copy_template('../templates/src/stylesheets/less/base/_normalize.less', scaffoldingPath + '/src/stylesheets/less/base/_normalize.less');
+					});
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/common', function() {
+						copy_template('../templates/src/stylesheets/less/common/_fonts.less', scaffoldingPath + '/src/stylesheets/less/common/_fonts.less');
+						copy_template('../templates/src/stylesheets/less/common/_imports.less', scaffoldingPath + '/src/stylesheets/less/common/_imports.less');
+						copy_template('../templates/src/stylesheets/less/common/_readymade.less', scaffoldingPath + '/src/stylesheets/less/common/_readymade.less');
+						copy_template('../templates/src/stylesheets/less/common/_variables.less', scaffoldingPath + '/src/stylesheets/less/common/_variables.less');
+					});
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/layout', function() {
+						copy_template('../templates/src/stylesheets/less/layout/_imports.less', scaffoldingPath + '/src/stylesheets/less/layout/_imports.less');
+						copy_template('../templates/src/stylesheets/less/layout/_layout.less', scaffoldingPath + '/src/stylesheets/less/layout/_layout.less');
+					});
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/modules', function() {
+						copy_template('../templates/src/stylesheets/less/modules/_imports.less', scaffoldingPath + '/src/stylesheets/less/modules/_imports.less');
+						copy_template('../templates/src/stylesheets/less/modules/_modules.less', scaffoldingPath + '/src/stylesheets/less/modules/_modules.less');
+					});
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/state', function() {
+						copy_template('../templates/src/stylesheets/less/state/_imports.less', scaffoldingPath + '/src/stylesheets/less/state/_imports.less');
+						copy_template('../templates/src/stylesheets/less/state/_state.less', scaffoldingPath + '/src/stylesheets/less/state/_state.less');
+					});
+					mkdirp(scaffoldingPath + '/src/stylesheets/less/theme', function() {
+						copy_template('../templates/src/stylesheets/less/theme/_imports.less', scaffoldingPath + '/src/stylesheets/less/theme/_imports.less');
+						copy_template('../templates/src/stylesheets/less/theme/_theme.less', scaffoldingPath + '/src/stylesheets/less/theme/_theme.less');
+					});
+					copy_template('../templates/src/stylesheets/less/_consolidate.less', scaffoldingPath + '/src/stylesheets/less/_consolidate.less');
+				});
+			}
+		});
+		mkdirp(scaffoldingPath + '/src/systems');
+		mkdirp(scaffoldingPath + '/src/systems/libs');
+		mkdirp(scaffoldingPath + '/src/systems/utilities', function() {
+			copy_template('../templates/src/systems/utilities/hb-template-mapper.js', scaffoldingPath + '/src/systems/utilities/hb-template-mapper.js');
+		});
+		mkdirp(scaffoldingPath + '/src/templates', function() {
+			copy_template('../templates/src/templates/aboutTpl.html', scaffoldingPath + '/src/templates/aboutTpl.html');
+			copy_template('../templates/src/templates/homeTpl.html', scaffoldingPath + '/src/templates/homeTpl.html');
+		});
+		mkdirp(scaffoldingPath + '/config');
+		mkdirp(scaffoldingPath + '/tests');
+		mkdirp(scaffoldingPath + '/tests/apps');
+		mkdirp(scaffoldingPath + '/tests/apps/router');
+		mkdirp(scaffoldingPath + '/tests/apps/views');
+		mkdirp(scaffoldingPath + '/tests/libs');
+	});
+};
+
+main();
+
+function main() {
+	var scaffoldingPath = program.args.shift() || '.';
+	var appName = path.basename(path.resolve(scaffoldingPath));
+
+	isDirectoryEmpty(scaffoldingPath, function(isEmpty) {
+		if (isEmpty) {
+			console.log("Create Application");
+			generateScaffolding(appName, scaffoldingPath);
+		} else {
+			confirm("Oh, scaffolding path is not empty!, Are you sure you want to continue? [Y/N] ", function(isYes) {
+				if (isYes) {
+					process.stdin.destroy();
+					generateScaffolding(appName, scaffoldingPath);
+				} else {
+					console.log("Can’t figure this out! aborting...");
+					exit(1);
+				}
+			});
+		}
+	});
+};
