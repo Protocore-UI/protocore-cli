@@ -52,7 +52,7 @@ function confirm(message, callback) {
 }
 
 function generateScaffolding(appName, scaffoldingPath) {
-	fse.copy('../templates/Protocore', scaffoldingPath, function(err) {
+	fse.copy('templates/', scaffoldingPath, function(err) {
 		if (err) {
 			return console.error(err);
 		}
