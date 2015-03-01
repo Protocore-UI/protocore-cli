@@ -26,7 +26,7 @@ main();
  */
 function isDirectoryEmpty(path, fn) {
 	fs.readdir(path, function(err, files) {
-		if (err) {
+		if (err && 'ENOENT' != err.code) {
 			throw err;
 		}
 		fn(!files || !files.length);
@@ -52,7 +52,7 @@ function confirm(message, callback) {
 }
 
 function generateScaffolding(appName, scaffoldingPath) {
-	fse.copy('templates/', scaffoldingPath, function(err) {
+	fse.copy('templates/', path.join(__dirname, scaffoldingPath), function(err) {
 		if (err) {
 			return console.error(err);
 		}
