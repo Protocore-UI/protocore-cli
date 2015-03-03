@@ -27,9 +27,15 @@ $ npm install
 
 This generator can also be further configured with the following command line flags.
 
-    -h, --help          output usage information
-    -V, --version       output the version number
-    -a, --about    		About Protocore-Cli 0.0.4
+```
+Usage: index [options] [dir]
+
+Options:
+
+  	-h, --help     output usage information
+    -V, --version  output the version number
+    -a, --about    About Protocore-Cli 0.0.5
+```
 
 ## Author & Contributors
 
