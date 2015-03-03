@@ -2,7 +2,7 @@
   "name": "protocore-cli",
   "version": "0.0.5",
   "author": "Ashwin Hegde",
-  "description": "",
+  "description": "protocore-cli is a command line generator for Protocore. The tool will help to generate walking application skeleton for a typical unstructured JavaScript/jQuery web apps.",
   "homepage": "https://github.com/hegdeashwin/protocore-cli",
   "repository": {
     "type": "git",
