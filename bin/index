@@ -3,7 +3,8 @@
 var os = require('os'),
 	fs = require('fs'),
 	path = require('path'),
-	readline = require('readline');
+	readline = require('readline'),
+	chalk = require('chalk');
 
 var program = require('commander'),
 	fse = require('fs-extra');
@@ -56,8 +57,10 @@ function generateScaffolding(appName, scaffoldingPath) {
 		if (err) {
 			return console.error(err);
 		}
-		console.log("\nCreated %s\n", scaffoldingPath);
-	})
+		console.log(chalk.green('\nStep 1: Created "' + chalk.bold.cyan('%s') + '" successfully.\n'), scaffoldingPath);
+		console.log(chalk.green("Step 2 Change the current working directory to a \"%s\", execute command: " + chalk.bold.cyan('cd %s\n')), scaffoldingPath, scaffoldingPath);
+		console.log(chalk.green("Step 3 Install dependencies, execute command: " + chalk.bold.cyan('npm install')));
+	});
 };
 
 function main() {
@@ -68,13 +71,13 @@ function main() {
 		if (isEmpty) {
 			generateScaffolding(appName, scaffoldingPath);
 		} else {
-			console.log("\nWarning: Oh, scaffolding path is not empty!");
+			console.log(chalk.yellow("\nWarning: Oh, scaffolding path is not empty!"));
 			confirm("Are you sure you want to continue? [Y/N] ", function(isYes) {
 				if (isYes) {
 					process.stdin.destroy();
 					generateScaffolding(appName, scaffoldingPath);
 				} else {
-					console.log("\nCan’t figure this out! aborting...\n");
+					console.log(chalk.red("\nCan't figure this out! aborting...\n"));
 					process.exit(1);
 				}
 			});
