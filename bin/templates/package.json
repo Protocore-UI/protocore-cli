@@ -1,28 +1,8 @@
 {
-    "name": "Protocore",
-    "version": "0.0.3",
-    "author": "Ashwin Hegde",
-    "description": "Protocore is an open source walking application skeleton for a typical unstructured JavaScript/jQuery web apps. You can use it to quickly bootstrap your unstructured JavaScript/jQuery web application projects.",
-    "contributors": [{
-        "name": "Ashwin Hegde",
-        "email": "github.com/hegdeashwin"
-    }],
-    "repository": {
-        "type": "git",
-        "url": "http://github.com/hegdeashwin/Protocore"
-    },
-    "issues": {
-        "url": "http://github.com/hegdeashwin/Protocore/issues?state=open"
-    },
-    "milestones": {
-        "url": "http://github.com/hegdeashwin/Protocore/issues/milestones"
-    },
-    "releases": {
-        "url": "http://github.com/hegdeashwin/Protocore/releases"
-    },
-    "wiki": {
-        "url": "http://github.com/hegdeashwin/Protocore/wiki"
-    },
+    "name": "",
+    "version": "0.0.0",
+    "author": "",
+    "description": "",
     "dependencies": {
         "express": "~4.12.0",
         "static-favicon": "~1.0.0",
@@ -49,9 +29,6 @@
         "grunt-jsonlint": "~1.0.4",
         "grunt-banner": "~0.3.1"
     },
-    "keywords": [
-        "javascript", "jquery", "framework", "web", "rest", "restful", "node", "express", "architecture"
-    ],
     "engines": {
         "node": ">=0.10"
     },
@@ -60,9 +37,5 @@
     },
     "main": {
         "start": "node server.js"
-    },
-    "licenses": [{
-        "type": "MIT",
-        "url": "http://raw.github.com/hegdeashwin/Protocore/master/LICENSE"
-    }]
+    }
 }
