@@ -30,9 +30,12 @@
     "protocore": "./bin/index"
   },
   "keywords": [
+    "jquery-boilerplate",
+    "protocore",
+    "protocore-generator",
+    "protocore-boilerplate",
     "generator",
     "framework",
-    "protocore",
     "cli",
     "rest",
     "boilerplate",
