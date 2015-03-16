@@ -1,4 +1,4 @@
-# Protocore-cli [![GitHub version](http://img.shields.io/badge/version-0.0.6-brightgreen.svg)](https://github.com/hegdeashwin/protocore-cli/releases)
+# Protocore-cli [![GitHub version](http://img.shields.io/badge/version-0.0.7-brightgreen.svg)](https://github.com/hegdeashwin/protocore-cli/releases)
 
 [![Dependency Status](https://gemnasium.com/hegdeashwin/protocore-cli.svg)](https://gemnasium.com/hegdeashwin/protocore-cli)  [![Node.js version](http://img.shields.io/badge/Node.js-%3E%200.10-brightgreen.svg)](https://github.com/hegdeashwin/protocore-cli)  [![Built with Grunt](http://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)  [![License version](http://img.shields.io/badge/License-MIT-red.svg)](https://github.com/hegdeashwin/protocore-cli#license)
 
@@ -34,7 +34,7 @@ Options:
 
   	-h, --help     output usage information
     -V, --version  output the version number
-    -a, --about    About Protocore-Cli 0.0.6
+    -a, --about    About Protocore-Cli 0.0.7
 ```
 
 ## Author & Contributors
