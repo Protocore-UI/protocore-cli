@@ -110,6 +110,21 @@ function updateProjectInfo(scaffoldingPath, fn) {
 			}
 		});
 	});
+	fse.readJson(scaffoldingPath + '/bower.json', function(err, bowerObj) {
+		if (err) {
+			return console.error(err);
+		}
+		var newBowerObj = mergeObj(bowerObj, {
+			name: scaffoldingPath
+		});
+		fse.writeJson(scaffoldingPath + '/bower.json', {
+			name: newBowerObj
+		}, function(err) {
+			if (err) {
+				console.error(err);
+			}
+		});
+	});
 	fse.outputFile(scaffoldingPath + '/README.md', '# ' + scaffoldingPath, function(err) {
 		if (err) {
 			return console.error(err);
