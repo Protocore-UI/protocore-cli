@@ -9,7 +9,7 @@
     "url": "https://github.com/hegdeashwin/protocore-cli.git"
   },
   "issues": {
-    "url": "https://github.com/hegdeashwin/protocore-cli/issues?state=open"
+    "url": "https://github.com/hegdeashwin/protocore-cli/issues"
   },
   "milestones": {
     "url": "https://github.com/hegdeashwin/protocore-cli/issues/milestones"
@@ -21,9 +21,9 @@
     "url": "https://github.com/hegdeashwin/protocore-cli/wiki"
   },
   "dependencies": {
-    "commander": "~2.8.0",
-    "fs-extra": "~0.18.0",
-    "chalk": "~1.0.0"
+    "commander": "~2.9.0",
+    "fs-extra": "~0.26.4",
+    "chalk": "~1.1.1"
   },
   "main": "bin/index",
   "bin": {
